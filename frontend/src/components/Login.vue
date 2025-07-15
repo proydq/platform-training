@@ -65,25 +65,31 @@ function handleLogin() {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  background: linear-gradient(135deg, #4f86ff, #8b2eff);
 }
 
 .login-card {
-  width: 320px;
+  width: 100%;
+  max-width: 450px;
   background: #fff;
-  border-radius: 12px;
+  border-radius: 20px;
   padding: 40px 30px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 .login-logo {
-  font-size: 40px;
+  font-size: 48px;
   margin-bottom: 10px;
 }
 
 .login-title {
   margin: 0;
+  font-weight: bold;
+  font-size: 24px;
+  background: linear-gradient(90deg, #4f86ff, #8b2eff);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .login-subtitle {
@@ -107,6 +113,17 @@ function handleLogin() {
 .register-link {
   margin-top: 20px;
   font-size: 12px;
+}
+
+.login-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #6a82fb, #a06af9);
+  border: none;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 </style>
 
