@@ -1,0 +1,112 @@
+<template>
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-logo">🎓</div>
+      <h1 class="login-title">智能培训系统</h1>
+      <p class="login-subtitle">公司内部产品培训平台</p>
+      <el-form ref="loginForm" :model="form" :rules="rules" label-position="top">
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="form.username" placeholder="请输入用户名或邮箱" />
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input v-model="form.password" type="password" placeholder="请输入密码" show-password />
+        </el-form-item>
+        <div class="login-options">
+          <el-checkbox v-model="form.remember">记住我</el-checkbox>
+          <a href="#" class="forgot-password">忘记密码？</a>
+        </div>
+        <el-form-item>
+          <el-button type="primary" class="login-btn" :loading="loading" @click="handleLogin">登录</el-button>
+        </el-form-item>
+      </el-form>
+      <div class="register-link">
+        还没有账号？<a href="#">联系管理员开通</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, reactive } from 'vue'
+import { ElMessage } from 'element-plus'
+
+const form = reactive({
+  username: '',
+  password: '',
+  remember: false,
+})
+
+const rules = {
+  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+}
+
+const loading = ref(false)
+const loginForm = ref(null)
+
+function handleLogin() {
+  loginForm.value.validate(async (valid) => {
+    if (!valid) return
+    loading.value = true
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    if (form.username === 'admin' && form.password === '123456') {
+      ElMessage.success('欢迎登录')
+    } else {
+      ElMessage.error('用户名或密码错误')
+    }
+    loading.value = false
+  })
+}
+</script>
+
+<style scoped>
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+}
+
+.login-card {
+  width: 320px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 40px 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-logo {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.login-title {
+  margin: 0;
+}
+
+.login-subtitle {
+  margin-bottom: 30px;
+  color: #666;
+  font-size: 14px;
+}
+
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.forgot-password {
+  font-size: 12px;
+  color: #409eff;
+}
+
+.register-link {
+  margin-top: 20px;
+  font-size: 12px;
+}
+</style>
+
