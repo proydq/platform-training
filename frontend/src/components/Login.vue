@@ -1,10 +1,11 @@
 <template>
-  <div class="login-container">
-    <div class="login-card">
-      <div class="login-logo">🎓</div>
-      <h1 class="login-title">智能培训系统</h1>
-      <p class="login-subtitle">公司内部产品培训平台</p>
-      <el-form ref="loginForm" :model="form" :rules="rules" label-position="top">
+  <div class="page-wrapper">
+    <div class="login-container">
+      <div class="login-card">
+        <div class="login-logo">🎓</div>
+        <h1 class="login-title">智能培训系统</h1>
+        <p class="login-subtitle">公司内部产品培训平台</p>
+        <el-form ref="loginForm" :model="form" :rules="rules" label-position="top">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="form.username" placeholder="请输入用户名或邮箱" />
         </el-form-item>
@@ -21,6 +22,7 @@
       </el-form>
       <div class="register-link">
         还没有账号？<a href="#">联系管理员开通</a>
+      </div>
       </div>
     </div>
   </div>
@@ -60,11 +62,17 @@ function handleLogin() {
 </script>
 
 <style scoped>
-.login-container {
-  min-height: 100vh;
+.page-wrapper {
+  height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 450px;
 }
 
 .login-card {
