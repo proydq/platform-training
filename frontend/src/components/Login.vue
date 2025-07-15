@@ -65,7 +65,6 @@ function handleLogin() {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #4f86ff, #8b2eff);
 }
 
 .login-card {
@@ -117,13 +116,30 @@ function handleLogin() {
 
 .login-btn {
   width: 100%;
+  color: #fff;
   background: linear-gradient(90deg, #6a82fb, #a06af9);
   border: none;
+  transition: transform 0.2s;
 }
 
 .login-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+</style>
+
+<style>
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: linear-gradient(135deg, #4f86ff, #8b2eff);
+  background-size: cover;
 }
 </style>
 
