@@ -31,6 +31,7 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { ElMessage } from 'element-plus'
+import { useRouter } from 'vue-router'
 
 const form = reactive({
   username: '',
@@ -45,6 +46,7 @@ const rules = {
 
 const loading = ref(false)
 const loginForm = ref(null)
+const router = useRouter()
 
 function handleLogin() {
   loginForm.value.validate(async (valid) => {
@@ -53,6 +55,7 @@ function handleLogin() {
     await new Promise((resolve) => setTimeout(resolve, 1000))
     if (form.username === 'admin' && form.password === '123456') {
       ElMessage.success('欢迎登录')
+      router.push('/dashboard')
     } else {
       ElMessage.error('用户名或密码错误')
     }
