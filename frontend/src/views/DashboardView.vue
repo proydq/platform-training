@@ -74,6 +74,9 @@ const examSchedule = {
       </div>
       <div class="nav-right">
         <span class="user-name">管理员王总</span>
+        <el-avatar class="avatar" size="32">
+          <el-icon><UserFilled /></el-icon>
+        </el-avatar>
         <el-button type="text" @click="logout">退出</el-button>
       </div>
     </el-header>
@@ -148,18 +151,22 @@ const examSchedule = {
 <style scoped>
 .dashboard-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 .nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  padding: 0 20px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  padding: 0 30px;
+  background: #fff;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  z-index: 100;
 }
 .nav-left {
   display: flex;
@@ -175,13 +182,15 @@ const examSchedule = {
   align-items: center;
   gap: 10px;
 }
+.avatar {
+  background-color: #eceff4;
+}
 .user-name {
   color: #333;
 }
 .content-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px 10px;
+  width: 100%;
+  padding: 80px 20px 20px;
 }
 .stat-card {
   text-align: center;
@@ -249,7 +258,7 @@ const examSchedule = {
   color: #333;
 }
 .exam-deadline {
-  color: #a18cd1;
+  color: #666;
   font-size: 14px;
 }
 .el-button {
