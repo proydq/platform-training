@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import {
   Menu as MenuIcon,
@@ -12,10 +13,23 @@ import {
   Document
 } from '@element-plus/icons-vue'
 
-const activeMenu = ref('dashboard')
+const router = useRouter()
+const route = useRoute()
+
+const activeMenu = ref(route.path.replace('/app/', '') || 'dashboard')
+
+watch(
+  () => route.path,
+  (path) => {
+    const index = path.replace('/app/', '')
+    if (index) activeMenu.value = index
+  }
+)
 
 function handleSelect(index) {
+  if (activeMenu.value === index) return
   activeMenu.value = index
+  router.push('/app/' + index)
 }
 
 function logout() {
