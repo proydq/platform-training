@@ -1,23 +1,27 @@
 <template>
   <div class="dashboard-wrapper">
     <div class="container">
-    <el-row class="mb-3">
-      <el-col :span="24">
-        <el-card class="navbar-card" body-style="{padding: '20px 30px'}">
-          <el-row align="middle" justify="space-between">
-            <div class="logo">
-              <span class="logo-icon">🎓</span>
-              <span class="logo-text">智能培训系统</span>
-            </div>
-            <div class="user-info">
-              <el-avatar :size="40" class="avatar" />
-              <span class="username">管理员王总</span>
-              <el-button class="gradient-btn" size="medium">退出</el-button>
-            </div>
-          </el-row>
-        </el-card>
-      </el-col>
-    </el-row>
+      <el-card class="navbar-card mb-3" body-style="{padding: '10px 20px'}">
+        <el-row align="middle" justify="space-between">
+          <div class="logo">
+            <span class="logo-icon">🎓</span>
+            <span class="logo-text">智能培训系统</span>
+          </div>
+          <el-menu mode="horizontal" class="nav-menu" :default-active="activeMenu">
+            <el-menu-item index="dashboard">仪表盘</el-menu-item>
+            <el-menu-item index="courses">我的课程</el-menu-item>
+            <el-menu-item index="exam">考试中心</el-menu-item>
+            <el-menu-item index="student">学员管理</el-menu-item>
+            <el-menu-item index="admin">管理后台</el-menu-item>
+            <el-menu-item index="help">帮助中心</el-menu-item>
+          </el-menu>
+          <div class="user-info">
+            <el-avatar :size="40" class="avatar">王</el-avatar>
+            <span class="username">管理员王总</span>
+            <el-button class="gradient-btn" size="small">退出</el-button>
+          </div>
+        </el-row>
+      </el-card>
 
     <el-row :gutter="20" class="stats-row mb-3">
       <el-col v-for="(stat, i) in stats" :key="i" :xs="24" :sm="12" :md="6" class="stat-col">
@@ -64,6 +68,10 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
+const activeMenu = ref('dashboard')
+
 const stats = [
   { label: '总学员数', number: 156 },
   { label: '课程总数', number: 48 },
@@ -86,6 +94,7 @@ const exams = [
 <style scoped>
 .dashboard-wrapper {
   box-sizing: border-box;
+  min-height: 100vh;
 }
 
 .container {
@@ -109,6 +118,16 @@ const exams = [
   min-height: 80px;
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(6px);
+}
+
+.nav-menu {
+  flex: 1;
+  justify-content: center;
+  border-bottom: none;
+}
+
+.nav-menu .el-menu-item.is-active {
+  color: #8b2eff;
 }
 
 
@@ -135,6 +154,7 @@ const exams = [
 .user-info {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .username {
@@ -229,7 +249,7 @@ const exams = [
 }
 
 .exam-item {
-  background: #fffdf5;
+  background: #fff7e0;
 }
 
 
@@ -268,7 +288,7 @@ const exams = [
 
 :global(body) {
   min-height: 100vh;
-  background: linear-gradient(135deg, #e6e7ff, #f0efff);
+  background: linear-gradient(135deg, #4f86ff, #8b2eff);
   background-size: cover;
 }
 </style>
