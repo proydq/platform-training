@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-wrapper">
-    <el-row justify="center" class="mb-3">
-      <el-col :span="22">
+    <el-row class="mb-3">
+      <el-col :span="24">
         <el-card class="navbar-card" body-style="{padding: '20px 30px'}">
           <el-row align="middle" justify="space-between">
             <div class="logo">
@@ -18,8 +18,8 @@
       </el-col>
     </el-row>
 
-    <el-row :gutter="20" justify="center" class="stats-row mb-3">
-      <el-col v-for="(stat, i) in stats" :key="i" :xs="12" :sm="6" :md="6" class="stat-col">
+    <el-row :gutter="20" class="stats-row mb-3">
+      <el-col v-for="(stat, i) in stats" :key="i" :xs="24" :sm="12" :md="6" class="stat-col">
         <el-card class="stat-card" shadow="hover">
           <div class="stat-number">{{ stat.number }}</div>
           <div class="stat-label">{{ stat.label }}</div>
@@ -27,8 +27,8 @@
       </el-col>
     </el-row>
 
-    <el-row :gutter="20" justify="center" class="content-row">
-      <el-col :xs="24" :md="14" class="mb-3">
+    <el-row :gutter="20" class="content-row">
+      <el-col :xs="24" :md="14" :lg="14" class="mb-3">
         <el-card class="content-card" header="🔥 最新课程">
           <div v-for="(course, idx) in courses" :key="idx" class="course-item">
             <div class="course-info">
@@ -46,7 +46,7 @@
         </el-card>
       </el-col>
 
-      <el-col :xs="24" :md="8" class="mb-3">
+      <el-col :xs="24" :md="10" :lg="10" class="mb-3">
         <el-card class="content-card exam-card" header="📋 考试安排">
           <div v-for="(exam, idx) in exams" :key="idx" class="exam-item">
             <div class="exam-info">
@@ -156,14 +156,12 @@ const exams = [
 }
 
 .stat-col {
-  display: flex;
-  justify-content: center;
   margin-bottom: 20px;
 }
 
 .stat-card {
   text-align: center;
-  width: 220px;
+  width: 100%;
   padding: 20px 0;
 }
 
@@ -183,6 +181,10 @@ const exams = [
   padding: 20px;
 }
 
+.exam-card {
+  min-height: 300px;
+}
+
 .course-item,
 .exam-item {
   display: flex;
@@ -191,6 +193,7 @@ const exams = [
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 12px;
+  width: 100%;
 }
 
 .course-item {
