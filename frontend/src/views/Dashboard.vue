@@ -89,7 +89,7 @@ const exams = [
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 30px 20px;
 }
@@ -107,6 +107,8 @@ const exams = [
 
 .navbar-card {
   min-height: 80px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
 }
 
 
@@ -126,6 +128,8 @@ const exams = [
   background: linear-gradient(90deg, #4f86ff, #8b2eff);
   -webkit-background-clip: text;
   color: transparent;
+  font-size: 24px;
+  letter-spacing: 1px;
 }
 
 .user-info {
@@ -135,6 +139,7 @@ const exams = [
 
 .username {
   margin: 0 10px;
+  font-weight: 500;
 }
 
 .avatar {
@@ -148,6 +153,7 @@ const exams = [
   border: none;
   transition: transform 0.2s;
   border-radius: 12px;
+  padding: 8px 18px;
 }
 
 .gradient-btn:hover {
@@ -167,18 +173,35 @@ const exams = [
   text-align: center;
   width: 100%;
   padding: 20px 0;
+  color: #fff;
 }
 
 .stat-number {
   font-size: 32px;
   font-weight: bold;
-  color: #333;
+  color: #fff;
   margin-bottom: 8px;
 }
 
 .stat-label {
   margin-top: 8px;
-  color: #666;
+  color: #f5f5f5;
+}
+
+.stat-col:nth-child(1) .stat-card {
+  background: linear-gradient(135deg, #7b9dff, #8795ff);
+}
+
+.stat-col:nth-child(2) .stat-card {
+  background: linear-gradient(135deg, #a56bff, #d476ff);
+}
+
+.stat-col:nth-child(3) .stat-card {
+  background: linear-gradient(135deg, #6fafff, #8cc2ff);
+}
+
+.stat-col:nth-child(4) .stat-card {
+  background: linear-gradient(135deg, #898dff, #c89aff);
 }
 
 .content-card {
@@ -198,14 +221,15 @@ const exams = [
   margin-bottom: 20px;
   border-radius: 12px;
   width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .course-item {
-  background: #f8faff;
+  background: #fdfdff;
 }
 
 .exam-item {
-  background: #fff7e0;
+  background: #fffdf5;
 }
 
 
@@ -244,7 +268,7 @@ const exams = [
 
 :global(body) {
   min-height: 100vh;
-  background: linear-gradient(135deg, #4f86ff, #8b2eff);
+  background: linear-gradient(135deg, #e6e7ff, #f0efff);
   background-size: cover;
 }
 </style>
