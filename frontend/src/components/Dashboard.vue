@@ -1,16 +1,17 @@
 <template>
   <div class="dashboard-wrapper">
-    <!-- Top Navigation -->
-    <el-row justify="center" class="mb-3">
-      <el-col :span="22">
-        <el-card class="navbar-card" body-style="{padding: '10px 20px'}">
-          <el-row align="middle" justify="space-between">
-            <el-col :span="4">
-              <div class="logo">
-                <span class="logo-icon">🎓</span>
-                <span class="logo-text">智能培训系统</span>
-              </div>
-            </el-col>
+    <div class="container">
+      <!-- Top Navigation -->
+      <el-row class="mb-3">
+        <el-col :span="24">
+          <el-card class="navbar-card" body-style="{padding: '10px 20px'}">
+            <el-row align="middle" justify="space-between">
+              <el-col :span="4">
+                <div class="logo">
+                  <span class="logo-icon">🎓</span>
+                  <span class="logo-text">智能培训系统</span>
+                </div>
+              </el-col>
             <el-col :span="14">
               <el-menu mode="horizontal" :default-active="activeMenu" class="nav-menu">
                 <el-menu-item index="dashboard">仪表盘</el-menu-item>
@@ -28,25 +29,33 @@
               </div>
             </el-col>
           </el-row>
-        </el-card>
-      </el-col>
-    </el-row>
+          </el-card>
+        </el-col>
+      </el-row>
 
     <!-- Statistics -->
-    <el-row :gutter="20" justify="center" class="stats-row mb-3">
-      <el-col v-for="(item,i) in stats" :key="i" :xs="12" :sm="6" :md="6">
-        <el-card class="stat-card" shadow="hover">
-          <div class="stat-number">{{ item.number }}</div>
-          <div class="stat-label">{{ item.label }}</div>
-        </el-card>
-      </el-col>
-    </el-row>
+      <el-row :gutter="20" class="stats-row mb-3">
+        <el-col
+          v-for="(item,i) in stats"
+          :key="i"
+          :xs="24"
+          :sm="12"
+          :md="6"
+          :lg="6"
+          :xl="6"
+        >
+          <el-card class="stat-card" shadow="hover">
+            <div class="stat-number">{{ item.number }}</div>
+            <div class="stat-label">{{ item.label }}</div>
+          </el-card>
+        </el-col>
+      </el-row>
 
     <!-- Content Cards -->
-    <el-row :gutter="20" justify="center" class="content-row">
-      <el-col :xs="24" :md="14" class="mb-3">
-        <el-card class="content-card" header="🔥 最新课程">
-          <div v-for="(c, index) in courses" :key="index" class="course-item">
+      <el-row :gutter="20" class="content-row">
+        <el-col :xs="24" :md="12" :lg="12" :xl="12" class="mb-3">
+          <el-card class="content-card" header="🔥 最新课程">
+            <div v-for="(c, index) in courses" :key="index" class="course-item">
             <div class="course-info">
               <span class="course-icon">{{ c.icon }}</span>
               <div class="course-details">
@@ -56,20 +65,21 @@
             </div>
             <el-button class="gradient-btn" size="small">学习</el-button>
           </div>
-        </el-card>
-      </el-col>
-      <el-col :xs="24" :md="8" class="mb-3">
-        <el-card class="content-card exam-card" header="📋 考试安排">
-          <div v-for="(exam, idx) in exams" :key="idx" class="exam-item">
-            <div class="exam-info">
-              <div class="exam-name">{{ exam.name }}</div>
-              <div class="exam-deadline">截止：{{ exam.deadline }}</div>
+          </el-card>
+        </el-col>
+        <el-col :xs="24" :md="12" :lg="12" :xl="12" class="mb-3">
+          <el-card class="content-card exam-card" header="📋 考试安排">
+            <div v-for="(exam, idx) in exams" :key="idx" class="exam-item">
+              <div class="exam-info">
+                <div class="exam-name">{{ exam.name }}</div>
+                <div class="exam-deadline">截止：{{ exam.deadline }}</div>
+              </div>
+              <el-button class="gradient-btn" size="small">开始考试</el-button>
             </div>
-            <el-button class="gradient-btn" size="small">开始考试</el-button>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
+          </el-card>
+        </el-col>
+      </el-row>
+    </div>
   </div>
 </template>
 
@@ -98,11 +108,15 @@ const exams = [
 <style scoped>
 .dashboard-wrapper {
   min-height: 100vh;
-  width: 100vw;
   padding: 20px;
   box-sizing: border-box;
   background: linear-gradient(135deg, #4f86ff, #8b2eff);
   overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .mb-3 {
   margin-bottom: 20px;
