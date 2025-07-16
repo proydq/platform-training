@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard-wrapper">
+    <div class="container">
     <el-row class="mb-3">
       <el-col :span="24">
         <el-card class="navbar-card" body-style="{padding: '20px 30px'}">
@@ -58,6 +59,7 @@
         </el-card>
       </el-col>
     </el-row>
+    </div>
   </div>
 </template>
 
@@ -83,11 +85,13 @@ const exams = [
 
 <style scoped>
 .dashboard-wrapper {
+  box-sizing: border-box;
+}
+
+.container {
   max-width: 1200px;
   margin: 0 auto;
-  min-height: 100vh;
   padding: 30px 20px;
-  box-sizing: border-box;
 }
 
 .mb-3 {
@@ -230,17 +234,16 @@ const exams = [
 .course-actions > .el-button:first-child {
   margin-right: 8px;
 }
-</style>
 
-<style>
-html,
-body,
-#app {
+:global(html),
+:global(body),
+:global(#app) {
   height: 100%;
   margin: 0;
-  overflow: hidden;
 }
-body {
+
+:global(body) {
+  min-height: 100vh;
   background: linear-gradient(135deg, #4f86ff, #8b2eff);
   background-size: cover;
 }
