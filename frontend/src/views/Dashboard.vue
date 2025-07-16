@@ -2,16 +2,16 @@
   <div class="dashboard-wrapper">
     <el-row justify="center" class="mb-3">
       <el-col :span="22">
-        <el-card class="navbar-card" body-style="{padding: '10px 20px'}">
+        <el-card class="navbar-card" body-style="{padding: '20px 30px'}">
           <el-row align="middle" justify="space-between">
             <div class="logo">
               <span class="logo-icon">🎓</span>
               <span class="logo-text">智能培训系统</span>
             </div>
             <div class="user-info">
-              <el-avatar :size="32" class="avatar" />
+              <el-avatar :size="40" class="avatar" />
               <span class="username">管理员王总</span>
-              <el-button class="gradient-btn" size="small">退出</el-button>
+              <el-button class="gradient-btn" size="medium">退出</el-button>
             </div>
           </el-row>
         </el-card>
@@ -19,7 +19,7 @@
     </el-row>
 
     <el-row :gutter="20" justify="center" class="stats-row mb-3">
-      <el-col v-for="(stat, i) in stats" :key="i" :xs="12" :sm="6" :md="6">
+      <el-col v-for="(stat, i) in stats" :key="i" :xs="12" :sm="6" :md="6" class="stat-col">
         <el-card class="stat-card" shadow="hover">
           <div class="stat-number">{{ stat.number }}</div>
           <div class="stat-label">{{ stat.label }}</div>
@@ -39,8 +39,8 @@
               </div>
             </div>
             <div class="course-actions">
-              <el-button class="gradient-btn" size="small">学习</el-button>
-              <el-button class="gradient-btn" size="small" plain>预览</el-button>
+              <el-button class="gradient-btn" size="medium">学习</el-button>
+              <el-button class="gradient-btn" size="medium" plain>预览</el-button>
             </div>
           </div>
         </el-card>
@@ -53,7 +53,7 @@
               <div class="exam-name">{{ exam.name }}</div>
               <div class="exam-time">{{ exam.time }}</div>
             </div>
-            <el-button class="gradient-btn" size="small">开始考试</el-button>
+            <el-button class="gradient-btn" size="medium">开始考试</el-button>
           </div>
         </el-card>
       </el-col>
@@ -101,16 +101,21 @@ const exams = [
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.navbar-card {
+  min-height: 80px;
+}
+
+
 .logo {
   display: flex;
   align-items: center;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .logo-icon {
-  font-size: 26px;
-  margin-right: 6px;
+  font-size: 32px;
+  margin-right: 10px;
 }
 
 .logo-text {
@@ -138,6 +143,7 @@ const exams = [
   background: linear-gradient(90deg, #6a82fb, #a06af9);
   border: none;
   transition: transform 0.2s;
+  border-radius: 12px;
 }
 
 .gradient-btn:hover {
@@ -149,14 +155,23 @@ const exams = [
   margin-bottom: 20px;
 }
 
+.stat-col {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
 .stat-card {
   text-align: center;
+  width: 220px;
+  padding: 20px 0;
 }
 
 .stat-number {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: bold;
   color: #333;
+  margin-bottom: 8px;
 }
 
 .stat-label {
@@ -173,14 +188,19 @@ const exams = [
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
 }
 
-.course-item:last-child,
-.exam-item:last-child {
-  border-bottom: none;
+.course-item {
+  background: #f8faff;
 }
+
+.exam-item {
+  background: #fff7e0;
+}
+
 
 .course-info {
   display: flex;
@@ -188,8 +208,9 @@ const exams = [
 }
 
 .course-icon {
-  font-size: 24px;
+  font-size: 28px;
   margin-right: 10px;
+  padding: 4px;
 }
 
 .course-name,
@@ -214,6 +235,7 @@ body,
 #app {
   height: 100%;
   margin: 0;
+  overflow: hidden;
 }
 body {
   background: linear-gradient(135deg, #4f86ff, #8b2eff);
