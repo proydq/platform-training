@@ -5,6 +5,7 @@ import Courses from '../components/Courses.vue'
 import Exams from '../components/Exams.vue'
 import StudentManagement from '../components/StudentManagement.vue'
 import Admin from '../components/Admin.vue'
+import { useAuthStore } from '../stores/authStore'
 
 const routes = [
   {
@@ -46,6 +47,15 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const auth = useAuthStore()
+  if (to.path !== '/login' && !auth.token) {
+    next('/login')
+  } else {
+    next()
+  }
 })
 
 export default router
