@@ -28,6 +28,18 @@ instance.interceptors.response.use(
     return Promise.reject(err)
   }
 )
-export default function http<T = any>(config: AxiosRequestConfig): Promise<T> {
-  return instance(config)
-}
+
+type AugmentedHttp = AxiosInstance & (<T = any>(cfg: AxiosRequestConfig) => Promise<T>)
+
+const http = instance as AugmentedHttp
+
+http.get = instance.get
+http.post = instance.post
+http.put = instance.put
+http.delete = instance.delete
+http.patch = instance.patch
+http.head = instance.head
+http.options = instance.options
+http.request = instance.request
+
+export default http

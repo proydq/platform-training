@@ -5,9 +5,9 @@ export interface LoginDto {
   password: string
 }
 
-export function loginApi(data: LoginDto) {
-  return http.post<{ token: string; user: { id: string; username: string } }>(
-    '/auth/login',
-    data
-  )
-}
+export const loginApi = (data: LoginDto) =>
+  http({ method: 'post', url: '/auth/login', data }) as Promise<{
+    token: string
+    user: { id: string; username: string }
+  }>;
+
