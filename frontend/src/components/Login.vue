@@ -26,10 +26,14 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
+import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
+import { useAuthStore } from '../stores/authStore'
+
+const router = useRouter()
+const authStore = useAuthStore()
 
 const form = reactive({
   username: '',
@@ -37,27 +41,25 @@ const form = reactive({
   remember: false,
 })
 
-const rules = {
+const rules: FormRules = {
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
 }
 
 const loading = ref(false)
-const loginForm = ref(null)
-const router = useRouter()
+const loginForm = ref<FormInstance>()
 
 function handleLogin() {
-  loginForm.value.validate(async (valid) => {
+  loginForm.value?.validate(async (valid) => {
     if (!valid) return
     loading.value = true
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    if (form.username === 'admin' && form.password === '123456') {
+    try {
+      await authStore.login({ username: form.username, password: form.password })
       ElMessage.success('欢迎登录')
       router.push('/dashboard')
-    } else {
-      ElMessage.error('用户名或密码错误')
+    } finally {
+      loading.value = false
     }
-    loading.value = false
   })
 }
 </script>

@@ -91,82 +91,15 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive } from 'vue'
-import { ElMessage } from 'element-plus'
-import { useRouter } from 'vue-router'
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import http from '../utils/http'
 
-const router = useRouter()
+const stats = ref([])
 
-// 菜单数据
-const menuItems = reactive([
-  { icon: '📊', name: '仪表盘', active: true },
-  { icon: '📚', name: '我的课程', active: false },
-  { icon: '📝', name: '考试中心', active: false },
-  { icon: '👥', name: '学员管理', active: false },
-  { icon: '⚙️', name: '管理后台', active: false }
-])
-
-// 统计数据
-const statsData = reactive([
-  { number: '156', label: '总学员数' },
-  { number: '48', label: '课程总数' },
-  { number: '89%', label: '系统活跃度' },
-  { number: '2,340', label: '总学习时长' }
-])
-
-// 课程列表
-const courseList = reactive([
-  {
-    icon: '📱',
-    name: '产品基础知识培训',
-    instructor: '张老师',
-    duration: '2小时',
-    action: '学习'
-  },
-  {
-    icon: '📊',
-    name: '市场分析与调研',
-    instructor: '李老师',
-    duration: '1.5小时',
-    action: '预览'
-  }
-])
-
-// 考试列表
-const examList = reactive([
-  {
-    name: '产品知识考试',
-    deadline: '2025-01-20',
-    action: '开始考试'
-  }
-])
-
-// 设置激活菜单
-const setActiveMenu = (index) => {
-  menuItems.forEach((item, i) => {
-    item.active = i === index
-  })
-  
-  // 根据菜单项导航
-  if (index === 1) { // 我的课程
-    router.push('/courses')
-  } else if (index === 2) { // 考试中心
-    router.push('/exams')
-  } else if (index === 3) { // 学员管理
-    router.push('/students')
-  } else if (index === 4) { // 管理后台
-    router.push('/admin')
-  }
-  
-  ElMessage.success(`切换到：${menuItems[index].name}`)
-}
-
-// 退出登录
-const handleLogout = () => {
-  ElMessage.success('退出登录成功')
-  router.push('/login')
-}
+onMounted(async () => {
+  stats.value = await http.get('/stats/overview')
+})
 </script>
 
 <style>
