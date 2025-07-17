@@ -90,17 +90,65 @@
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import http from '../utils/http'
+import { reactive, ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
+import http from '../utils/http'               // ← 相对路径
+import { useAuthStore } from '../stores/authStore'
 
-const stats = ref([])
+/* ── 顶部导航菜单 ── */
+const menuItems = reactive([
+  { name: '仪表盘',  icon: '📊', active: true,  path: '/dashboard' },
+  { name: '我的课程', icon: '📚', active: false, path: '/courses' },
+  { name: '考试中心', icon: '📝', active: false, path: '/exams' },
+  { name: '学员管理', icon: '👥', active: false, path: '/student-management' },
+  { name: '管理后台', icon: '⚙️', active: false, path: '/admin' }
+])
+
+const router = useRouter()
+function setActiveMenu(i: number) {
+  menuItems.forEach((m, idx) => (m.active = idx === i))
+  router.push(menuItems[i].path)
+}
+
+/* ── 统计卡片 ── */
+const statsData = ref<{ number: number | string; label: string }[]>([])
 
 onMounted(async () => {
-  stats.value = await http.get('/stats/overview')
+  try {
+    const res = await http.get('/stats/overview') // 后端需返回四个字段
+    statsData.value = [
+      { number: res.totalStudents,   label: '总学员数' },
+      { number: res.totalCourses,    label: '课程总数' },
+      { number: res.systemActivity,  label: '系统活跃度' },
+      { number: res.totalStudyHours, label: '总学习时长' }
+    ]
+  } catch {
+    // 接口未完成时占位，避免模板警告
+    statsData.value = [
+      { number: '-', label: '总学员数' },
+      { number: '-', label: '课程总数' },
+      { number: '-', label: '系统活跃度' },
+      { number: '-', label: '总学习时长' }
+    ]
+  }
 })
+
+/* ── 占位列表，可后续接接口 ── */
+const courseList = ref([])
+const examList   = ref([])
+
+/* ── 退出登录 ── */
+const auth = useAuthStore()
+function handleLogout() {
+  auth.logout()
+  ElMessage.success('已退出')
+  router.push('/login')
+}
 </script>
+
+
 
 <style>
 html, body, #app {
