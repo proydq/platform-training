@@ -17,7 +17,11 @@ public class Enrollment {
     @GenericGenerator(name="uuid2", strategy="uuid2")
     private String id;
     private String userId;
+    @Column(name = "course_id")
     private String courseId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id", insertable = false, updatable = false)
+    private Course course;
     @Enumerated(EnumType.STRING)
     private Status status; // NOT_STARTED,IN_PROGRESS,COMPLETED
     private Integer progressPercent;
