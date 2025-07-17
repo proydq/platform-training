@@ -1,5 +1,6 @@
 package com.proshine.training.user;
 
+import com.proshine.training.common.crypto.AESConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
-
-import com.proshine.training.common.crypto.AESConverter;
 
 @Data
 @Entity
