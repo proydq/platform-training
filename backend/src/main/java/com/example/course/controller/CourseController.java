@@ -22,8 +22,8 @@ public class CourseController {
     private final CourseRepository courseRepository;
 
     @GetMapping
-    public ResponseEntity<List<Course>> list(HttpServletRequest request) {
-        return ResponseEntity.ok(courseRepository.findAll(), request.getHeader("X-Request-ID"));
+    public ResponseEntity<List<Course>> list() {
+        return ResponseEntity.ok(courseRepository.findAll());   // 自动兜底 requestId
     }
 
     @PostMapping
