@@ -1,38 +1,33 @@
 package com.example.course.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.UuidGenerator;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "courses")
+@Table(name="courses")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Course {
     @Id
-    @Column(length = 36)
-    @UuidGenerator
+    @GeneratedValue(generator="uuid2")
+    @GenericGenerator(name="uuid2", strategy="uuid2")
     private String id;
-
-    @Column(nullable = false)
     private String title;
-
-    private String cover;
-
+    @Column(columnDefinition="text")
     private String description;
-
-    @CreationTimestamp
+    private String cover;
+    private Integer durationMinutes;
+    @Enumerated(EnumType.STRING)
+    private Status status; // DRAFT,PUBLISHED
+    @OneToMany(mappedBy = "courseId", fetch = FetchType.LAZY)
+    private List<Enrollment> enrollments;
     private LocalDateTime createdAt;
-
-    @UpdateTimestamp
     private LocalDateTime updatedAt;
+    public enum Status { DRAFT, PUBLISHED }
 }
