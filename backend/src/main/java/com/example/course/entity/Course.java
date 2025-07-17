@@ -5,7 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="courses")
@@ -25,8 +26,8 @@ public class Course {
     private Integer durationMinutes;
     @Enumerated(EnumType.STRING)
     private Status status; // DRAFT,PUBLISHED
-    @OneToMany(mappedBy = "courseId", fetch = FetchType.LAZY)
-    private List<Enrollment> enrollments;
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    private Set<Enrollment> enrollments = new HashSet<>();
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     public enum Status { DRAFT, PUBLISHED }
